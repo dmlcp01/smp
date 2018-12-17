@@ -1,12 +1,25 @@
 package model;
 
-public class Shelf extends Entity{
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQueries({
+	@NamedQuery(name="getAllShelves", query="SELECT s FROM Shelf s"),
+	@NamedQuery(name="findAllShelfsWithProductID", query="SELECT s FROM Shelf s WHERE s.product.id = :productId")
+})
+
+public class Shelf extends EntityModel{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private float capacity;
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Product product=null;
 	private float rentPrice;
 

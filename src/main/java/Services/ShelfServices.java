@@ -1,7 +1,8 @@
 package Services;
 
-import java.util.Collection;
+import java.util.List;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,7 +21,8 @@ import model.Shelf;
 
 @Path("/shelves")
 public class ShelfServices {
-	BusinessShelf businessShelf = new BusinessShelf();
+	@Inject
+	BusinessShelf businessShelf;
 
 	@POST 
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -49,16 +51,18 @@ public class ShelfServices {
 	public ShelfDTO updateShelfServices(@PathParam("id")long shelfId, Shelf input){
 		return businessShelf.updateShelf(input);
 	}
+
 	@GET
+	@Path("/getshelves")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  Collection<ShelfDTO> getAllShelvesServices(){
+	public  List<ShelfDTO> getAllShelvesServices(){
 		return businessShelf.getAll();
 	}
 	@GET
 	@Path("/product/{productId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<ShelfDTO> getAllShelvesWithProductID(@PathParam("productId")long productId, Shelf input){
+	public List<Shelf> getAllShelvesWithProductID(@PathParam("productId")long productId, Shelf input){
 		return businessShelf.getAllShelvesWithProductID(productId);
 	}
 }

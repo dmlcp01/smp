@@ -12,4 +12,15 @@ public class ProductRepository extends EntityRepository<Product> {
 		return INSTANCE;
 	}
 
+	@Override
+	protected Class<Product> getEntityClass() {
+		return Product.class;
+	}
+
+	@Override
+	protected String getAllEntityQueryName() {
+
+		return "getAllProducts";
+	}
+
 }

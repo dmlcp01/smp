@@ -1,43 +1,45 @@
 package repositories;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import model.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import model.EntityModel;
 
 
-public class EntityRepository < V extends Entity> {
-	private Map<Long, V> map = new HashMap<Long, V>();
-	private long actualId = 0;
-
-	public V save(V entity) {
-		entity.setId(actualId);
-		map.put(entity.getId(), entity);
-		actualId++;
-		return entity;
-	}
-
-	public V findById(Long id) {
-		return map.get(id);
-	}
-
+public abstract class EntityRepository < V extends EntityModel> {
+	
+	@PersistenceContext
+	protected EntityManager em;
+	
 	public void removeById(long id) {
-		map.remove(id);
-
+		V entity = findById(id);
+		if(entity != null) {
+			em.remove(entity);
+		}
 	}
 
-	public V update( V entity) {
-		map.replace(entity.getId(), entity);
-		return entity;
+	public V update(V  entity) {
+		return em.merge(entity);
 	}
-
-	public Collection<V> getAll() {
-		return map.values();
+	
+	public V save(V  entity) {
+		return em.merge(entity);
 	}
-
-	public Map<Long, V> getMap() {
-		return map;
+	
+	
+	public V findById(long id) {
+		return em.find(getEntityClass(), id);
 	}
+	
+	public List<V> getAll(){
+		return em.createNamedQuery(getAllEntityQueryName(), getEntityClass()).getResultList();
+	} 
+	
+	protected  abstract Class<V> getEntityClass();
+	
+	protected abstract String getAllEntityQueryName();
 }
+
 

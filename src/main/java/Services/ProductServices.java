@@ -1,5 +1,8 @@
 package Services;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,9 +18,17 @@ import model.Product;
 
 @Path("/product")
 public class ProductServices {
-	BusinessProduct businessProduct = new BusinessProduct();
-	ProductDTO productDTO = new ProductDTO();
+	@Inject
+	BusinessProduct businessProduct;
+	ProductDTO productDTO;
 	
+	@GET
+	@Path("/health")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getHealth() {
+		return "Health is ok!";
+	}
+		
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -47,5 +58,12 @@ public class ProductServices {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductDTO updateProductServices(@PathParam("id") long productId, Product input) {
 		return businessProduct.updateproduct(input);
+	}
+	
+	@GET
+	@Path("/getall")
+	@Produces(MediaType.APPLICATION_JSON)
+	public  List<ProductDTO> getAllProductServices(){
+		return businessProduct.getAll();
 	}
 }

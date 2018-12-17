@@ -3,11 +3,21 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product extends Entity{
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+@Entity
+@NamedQuery(name="getAllProducts", query="SELECT p FROM Product p")
+public class Product extends EntityModel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+
+	@OneToMany (fetch = FetchType.LAZY, mappedBy = "product")
 	private List<Shelf> list = new ArrayList<Shelf>();
 	private float price;
 	private float discountValue;

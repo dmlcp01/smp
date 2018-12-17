@@ -1,13 +1,14 @@
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/model/Shelf.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/dto/ProductDTO.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/repositories/EntityRepository.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/dto/ShelfDTO.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/repositories/ProductRepository.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/Business/BusinessShelf.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/Services/Api.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/model/Entity.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/Services/ShelfServices.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/repositories/ShelfRepository.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/model/Product.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/Services/ProductServices.java
-/Users/alunotarde/Desktop/Repositorios/2moduleJava/Projecto JEE/src/main/java/Business/BusinessProduct.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/dto/ShelfDTO.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/Business/BusinessProduct.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/model/Product.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/repositories/EntityRepository.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/model/EntityModel.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/dto/ProductDTO.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/Services/ProductServices.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/filters/CORSFilter.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/Services/ShelfServices.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/Business/BusinessShelf.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/model/Shelf.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/Services/Api.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/repositories/ProductRepository.java
+/Users/alunotarde/Desktop/Repositorios/2moduleJava/smp/src/main/java/repositories/ShelfRepository.java

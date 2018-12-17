@@ -1,8 +1,8 @@
 package dto;
 
-import model.Entity;
+import model.EntityModel;
 
-public class ShelfDTO extends Entity{
+public class ShelfDTO extends EntityModel{
 	/**
 	 * 
 	 */
@@ -11,17 +11,17 @@ public class ShelfDTO extends Entity{
 	private float capacity;
 	private ProductDTO productdto = null;
 	private float rentPrice;
-	Long id;
+	
 	
 	public ShelfDTO(){};
 	
-	public ShelfDTO(Long id, float capacity,float rentPrice) {
+	public ShelfDTO(Long id, float capacity,float rentPrice,ProductDTO productdto) {
 		super();
 		this.capacity = capacity;
 		this.rentPrice = rentPrice;
-		this.id = id;
+		setId(id);
+		this.productdto=productdto;
 	}
-	
 
 
 	public float getCapacity() {

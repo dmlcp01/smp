@@ -1,56 +1,97 @@
 package Business;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+
+import dto.ProductDTO;
 import dto.ShelfDTO;
+import model.Product;
 import model.Shelf;
 import repositories.ShelfRepository;
 
 public class BusinessShelf {
-	private static ShelfRepository shelfRepository = ShelfRepository.getInstance();
+	@Inject
+	ShelfRepository shelfRepository;
 
+	@Transactional
 	public ShelfDTO createShelf(Shelf input) {
 		Shelf temp = shelfRepository.save(input);
-		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice());
+		Product prod = temp.getProduct();
+		if (prod != null) {
+		ProductDTO pd = new ProductDTO(prod.getId(), prod.getPrice(), prod.getDiscountValue(), prod.getIva(),
+				prod.getPvp());
+		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice(), pd);
 		return shelfdto;
+	}else {
+		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice(), null);
+		return shelfdto;
+		}
 	}
 
 	public ShelfDTO getShelf(long id) {
 		Shelf temp = shelfRepository.findById(id);
-		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice());
+		Product prod = temp.getProduct();
+		if (prod != null) {
+		ProductDTO pd = new ProductDTO(prod.getId(), prod.getPrice(), prod.getDiscountValue(), prod.getIva(),
+				prod.getPvp());
+		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice(), pd);
 		return shelfdto;
+		}else {
+			ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice(), null);
+			return shelfdto;
+			}
 	}
 
+	@Transactional
 	public void deleteShelf(long id) {
-		shelfRepository.removeById(id);
+		Shelf temp = shelfRepository.findById(id);
+		if (temp != null) {
+			shelfRepository.removeById(id);
+		}
 	}
 
+	@Transactional
 	public ShelfDTO updateShelf(Shelf input) {
 		Shelf temp = shelfRepository.update(input);
-		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice());
+		Product prod = temp.getProduct();
+		if (prod != null) {
+			ProductDTO pd = new ProductDTO(prod.getId(), prod.getPrice(), prod.getDiscountValue(), prod.getIva(),
+				prod.getPvp());
+		ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice(), pd);
 		return shelfdto;
-	}
-
-	public Collection<ShelfDTO> getAll() {
-		Collection<Shelf> cs =shelfRepository.getAll();
-		List<ShelfDTO> listToBeReturned = new ArrayList<ShelfDTO>();
-		for(Shelf s : cs){
-			ShelfDTO shelfdto = new ShelfDTO(s.getId(), s.getCapacity(), s.getRentPrice());
-			listToBeReturned.add(shelfdto);
+		}else {
+			ShelfDTO shelfdto = new ShelfDTO(temp.getId(), temp.getCapacity(), temp.getRentPrice(), null);
+			return shelfdto;
+			}
 		}
-		return listToBeReturned;
-	}
 
-	public Collection<ShelfDTO> getAllShelvesWithProductID(long id) {
-		Collection<Shelf> list = shelfRepository.getAll();
+	public List<ShelfDTO> getAll() {
+		List<Shelf> cs = shelfRepository.getAll();
 		List<ShelfDTO> listToBeReturned = new ArrayList<ShelfDTO>();
-		for (Shelf s : list) {
-			ShelfDTO shelfdto = new ShelfDTO(s.getId(), s.getCapacity(), s.getRentPrice());
-			if (s.getProduct() != null && id == s.getProduct().getId())
+		for (Shelf s : cs) {
+			Product prod = s.getProduct();
+			if (prod != null) {
+				ProductDTO pd = new ProductDTO(prod.getId(), prod.getPrice(), prod.getDiscountValue(), prod.getIva(),
+						prod.getPvp());
+				ShelfDTO shelfdto = new ShelfDTO(s.getId(), s.getCapacity(), s.getRentPrice(), pd);
 				listToBeReturned.add(shelfdto);
+			}else {
+				ShelfDTO shelfdto = new ShelfDTO(s.getId(), s.getCapacity(), s.getRentPrice(), null);
+				listToBeReturned.add(shelfdto);
+				}
 		}
 		return listToBeReturned;
+	}
+
+	public List<Shelf> getAllShelvesWithProductID(long id) {
+		List<Shelf> list = shelfRepository.getAll();
+		for (Shelf s : list) {
+			if (s.getProduct() != null)
+				return shelfRepository.findByProductId(id);
+		}
+		return null;
 	}
 }

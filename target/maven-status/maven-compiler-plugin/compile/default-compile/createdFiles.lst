@@ -8,6 +8,7 @@ model/Product.class
 Services/ShelfServices.class
 Business/BusinessProduct.class
 repositories/ShelfRepository.class
+filters/CORSFilter.class
 model/Shelf.class
+model/EntityModel.class
 dto/ShelfDTO.class
-model/Entity.class

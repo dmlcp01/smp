@@ -1,8 +1,8 @@
 package dto;
 
-import model.Entity;
+import model.EntityModel;
 
-public class ProductDTO extends Entity{
+public class ProductDTO extends EntityModel{
 		/**
 		 * 
 		 */
@@ -11,25 +11,17 @@ public class ProductDTO extends Entity{
 		private float discountValue;
 		private float iva;
 		private float pvp;
-		private Long id;
+
 		
 		public ProductDTO(){};
 		
-		public ProductDTO(Long id, float price, float discountValue, float iva, float pvp) {
+		public ProductDTO(Long id,float price, float discountValue, float iva, float pvp) {
 			super();
-			this.id = id;
 			this.price = price;
 			this.discountValue = discountValue;
 			this.iva = iva;
 			this.pvp = pvp;
-		}
-		
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
+			setId(id);
 		}
 
 		public float getPrice() {
